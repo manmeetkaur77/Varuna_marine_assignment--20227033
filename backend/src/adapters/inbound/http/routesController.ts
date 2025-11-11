@@ -22,6 +22,11 @@ export const setBaseline = async (req: Request, res: Response) => {
   }
 };
 
+
+import { computeCB, getCB } from "../../../adapters/inbound/http/complianceController";
+
+
+
 export const getComparison = async (req: Request, res: Response) => {
   try {
     const baseline = await repo.getBaseline();
@@ -42,3 +47,5 @@ export const getComparison = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to compute comparison" });
   }
 };
+
+

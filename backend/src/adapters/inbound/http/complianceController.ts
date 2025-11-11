@@ -43,3 +43,17 @@ export const getCB = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+
+const complianceRepo = new ComplianceRepository();
+
+export const calculateCompliance = async (req: Request, res: Response) => {
+  try {
+    const { shipId, year } = req.body;
+    const result = await complianceRepo.calculateCompliance(shipId, year);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to calculate compliance", details: err });
+  }
+};
+

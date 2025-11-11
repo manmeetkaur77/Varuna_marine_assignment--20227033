@@ -19,3 +19,18 @@ model Route {
   totalEmissions  Float
   isBaseline      Boolean @default(false)
 }
+model ShipCompliance {
+  shipId       String
+  year         Int
+  cbGco2eq     Float
+
+  @@id([shipId, year]) // composite primary key
+}
+
+model BankEntry {
+  id           Int      @id @default(autoincrement())
+  shipId       String
+  year         Int
+  amountGco2eq Float
+  createdAt    DateTime @default(now())
+}
