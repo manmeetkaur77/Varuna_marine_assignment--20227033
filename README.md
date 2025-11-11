@@ -55,7 +55,7 @@ backend/
 
 ### 1-Routes Tab
 Displays all available shipping routes with baseline selection.  
-![Routes Tab](/Users/manmeetkaur/Desktop/varuna_marine/fuel-eu/Routes.png)
+![Routes Tab](./frontend/public/screenshots/Routes.png)
 
 ### 2-Compare Tab
 Shows GHG intensity comparison and compliance chart.  
