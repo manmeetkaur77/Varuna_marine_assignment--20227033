@@ -63,7 +63,7 @@ Shows GHG intensity comparison and compliance chart.
 
 ### 3-Banking Tab
 Implements Article 20 – Banking (store and apply compliance balances).  
-![Banking Tab](./frontend/public/screenshots/banking-dashboard.png)
+![Banking Tab](./frontend/public/screenshots/banking.png)
 
 ### 4-Pooling Tab
 Implements Article 21 – Pooling (share adjusted compliance balances).  
