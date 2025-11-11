@@ -59,7 +59,7 @@ Displays all available shipping routes with baseline selection.
 
 ### 2-Compare Tab
 Shows GHG intensity comparison and compliance chart.  
-![Compare Tab](./frontend/public/screenshots/compare-tab.png)
+![Compare Tab](./frontend/public/screenshots/compare.png)
 
 ### 3-Banking Tab
 Implements Article 20 – Banking (store and apply compliance balances).  
