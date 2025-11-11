@@ -1,0 +1,61 @@
+.routes-container {
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 12px;
+  }
+  
+  h2 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+  
+  .filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  select {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .routes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+  
+  .routes-table th,
+  .routes-table td {
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  
+  .routes-table th {
+    background: #1e3a8a;
+    color: white;
+  }
+  
+  .baseline-row {
+    background-color: #d1fae5;
+    font-weight: bold;
+  }
+  
+  .baseline-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .baseline-btn:hover {
+    background: #1e40af;
+  }
+  

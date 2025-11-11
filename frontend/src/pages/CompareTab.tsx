@@ -1,39 +1,106 @@
-import React from "react";
-import { useCompare } from "../adapters/ui/useCompare";
+// src/pages/CompareTab.tsx
+import React, { useEffect, useState } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
+} from "recharts";
 
-function SimpleBar({ value, label }: { value: number; label: string }) {
-  const height = Math.max(4, Math.min(200, Math.round(Math.abs(value) * 2)));
+import "../pages/compare.css";
+
+const CompareTab: React.FC = () => {
+  const [baseline, setBaseline] = useState<any>(null);
+  const [comparisons, setComparisons] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/routes/comparison")
+      .then((res) => res.json())
+      .then((data) => {
+        setBaseline(data.baseline);
+        setComparisons(data.comparisons);
+      })
+      .catch((err) => console.error("Error fetching comparison:", err));
+  }, []);
+
+  if (!baseline) return <p>Loading comparison data...</p>;
+
+  // Combine baseline + comparison routes for chart
+  const chartData = [
+    { routeId: baseline.routeId, ghgIntensity: baseline.ghgIntensity },
+    ...comparisons,
+  ];
+
   return (
-    <div className="flex flex-col items-center">
-      <div style={{ height }} className="w-12 bg-sky-500 mb-1" />
-      <div className="text-xs">{label}</div>
+    <div className="compare-container">
+      <h2>⚖️ GHG Intensity Comparison</h2>
+
+      <div className="baseline-info">
+        <strong>Baseline Route:</strong> {baseline.routeId} (
+        {baseline.ghgIntensity} gCO₂e/MJ)
+      </div>
+
+      {/* Comparison Table */}
+      <table className="compare-table">
+        <thead>
+          <tr>
+            <th>Route ID</th>
+            <th>GHG Intensity (gCO₂e/MJ)</th>
+            <th>% Difference vs Baseline</th>
+            <th>Compliant (≤ 89.3368)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparisons.map((r) => (
+            <tr key={r.routeId}>
+              <td>{r.routeId}</td>
+              <td>{r.ghgIntensity.toFixed(2)}</td>
+              <td
+                style={{
+                  color: r.percentDiff > 0 ? "#dc2626" : "#16a34a",
+                  fontWeight: "bold",
+                }}
+              >
+                {r.percentDiff.toFixed(2)}%
+              </td>
+              <td>{r.compliant ? "✅" : "❌"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h3>📊 Chart: Baseline vs Routes</h3>
+      <ResponsiveContainer width="100%" height={350}>
+        <BarChart
+          data={chartData}
+          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="routeId" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <ReferenceLine
+            y={89.3368}
+            label="Target (89.34)"
+            stroke="red"
+            strokeDasharray="5 5"
+          />
+          <Bar
+            dataKey="ghgIntensity"
+            fill="#2563eb"
+            name="GHG Intensity"
+            radius={[6, 6, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
-}
+};
 
-export default function CompareTab() {
-  const { rows, loading } = useCompare();
-
-  return (
-    <div className="bg-white p-4 rounded shadow">
-      <h3 className="font-semibold mb-3">Compare (target 89.3368)</h3>
-      {loading ? <div>Loading...</div> :
-        <>
-          <table className="w-full text-sm mb-4">
-            <thead><tr className="text-left text-slate-700"><th>route</th><th>baseline</th><th>comparison</th><th>% diff</th><th>compliant</th></tr></thead>
-            <tbody>
-              {rows.map((r:any)=> {
-                const percent = ((r.comparison / r.baseline) - 1) * 100;
-                return <tr key={r.routeId} className="border-t"><td>{r.routeId}</td><td>{r.baseline}</td><td>{r.comparison}</td><td>{percent.toFixed(2)}%</td><td>{r.comparison <= r.baseline ? "✅":"❌"}</td></tr>;
-              })}
-            </tbody>
-          </table>
-
-          <div className="flex gap-4">
-            {rows.map((r:any)=> <SimpleBar key={r.routeId} value={r.comparison} label={r.routeId} />)}
-          </div>
-        </>
-      }
-    </div>
-  );
-}
+export default CompareTab;

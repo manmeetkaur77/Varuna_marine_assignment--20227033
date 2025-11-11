@@ -1,0 +1,87 @@
+.banking-container {
+    padding: 24px;
+    font-family: "Inter", sans-serif;
+    color: #1e293b;
+  }
+  
+  .banking-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .banking-form input {
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+  }
+  
+  .cb-info {
+    margin-bottom: 20px;
+    background: #f1f5f9;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .actions h4 {
+    margin-bottom: 5px;
+  }
+  
+  .actions input {
+    margin-right: 10px;
+    padding: 6px 10px;
+  }
+  
+  .actions button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .actions button:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+  }
+  
+  .message {
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  .records-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .records-table th,
+  .records-table td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  
+  .records-table th {
+    background: #f8fafc;
+    color: #0f172a;
+  }
+  
+  .banking-container {
+    padding: 24px;
+    background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: "Inter", sans-serif;
+    color: #1e293b;
+  }
+  

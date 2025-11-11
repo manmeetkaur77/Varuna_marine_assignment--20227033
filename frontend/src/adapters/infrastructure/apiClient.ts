@@ -1,16 +1,21 @@
-// src/adapters/api.ts
+// src/adapters/infrastructure/apiClient.ts
 const API_BASE = "http://localhost:3000/api";
 
-export async function getRoutes() {
+
+async function getRoutes() {
   const res = await fetch(`${API_BASE}/routes`);
   if (!res.ok) throw new Error("Failed to fetch routes");
   return res.json();
 }
 
-export async function getBaseline() {
+async function getBaseline() {
   const res = await fetch(`${API_BASE}/baseline`);
   if (!res.ok) throw new Error("Failed to fetch baseline");
   return res.json();
 }
 
-// you can add more later (banking, pooling, etc.)
+// ✅ export an object named API
+export const API = {
+  getRoutes,
+  getBaseline,
+};

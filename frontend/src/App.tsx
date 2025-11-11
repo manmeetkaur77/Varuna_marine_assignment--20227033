@@ -1,56 +1,88 @@
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
+import RoutesTab from "./pages/RoutesTab";
+import CompareTab from "./pages/CompareTab";
+import BankingTab from "./pages/BankingTab";
+import PoolingTab from "./pages/PoolingTab";
+
+// ✅ Error Boundary component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: any }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: any) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: any, info: any) {
+    console.error("🔥 Error caught by ErrorBoundary:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="text-center text-red-600 mt-10 text-lg">
+          ⚠️ Something went wrong. Check the console for details.
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 function App() {
-  const [hello, setHello] = useState("");
-  const [routes, setRoutes] = useState<any[]>([]);
-
+  // ✅ Log unhandled errors globally
   useEffect(() => {
-    // ✅ Test backend connection
-    fetch("http://localhost:3000/hello")
-      .then((res) => res.text())
-      .then(setHello)
-      .catch((err) => console.error("Hello fetch error:", err));
-
-    // ✅ Fetch routes data
-    fetch("http://localhost:3000/routes")
-      .then((res) => res.json())
-      .then(setRoutes)
-      .catch((err) => console.error("Routes fetch error:", err));
+    window.addEventListener("error", (e) => {
+      console.error("🧨 Global Error:", e.error || e.message);
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      console.error("🚨 Unhandled Promise Rejection:", e.reason);
+    });
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4 text-blue-600">Fuel EU Dashboard Test</h1>
-      <p className="text-lg mb-4">{hello || "Connecting to backend..."}</p>
+    <Router>
+      <ErrorBoundary>
+        <div className="min-h-screen bg-gray-50 text-gray-900">
+          <nav className="flex justify-center gap-4 bg-blue-600 text-white p-4">
+            <Link to="/routes" className="hover:underline">Routes</Link>
+            <Link to="/compare" className="hover:underline">Compare</Link>
+            <Link to="/banking" className="hover:underline">Banking</Link>
+            <Link to="/pooling" className="hover:underline">Pooling</Link>
+          </nav>
 
-      <h2 className="font-semibold text-xl mb-2">Routes Data:</h2>
-      {routes.length === 0 ? (
-        <p>Loading routes...</p>
-      ) : (
-        <table className="border-collapse border border-gray-400">
-          <thead>
-            <tr>
-              <th className="border p-2">Route ID</th>
-              <th className="border p-2">Vessel Type</th>
-              <th className="border p-2">Fuel Type</th>
-              <th className="border p-2">Year</th>
-              <th className="border p-2">GHG Intensity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {routes.map((r) => (
-              <tr key={r.routeId}>
-                <td className="border p-2">{r.routeId}</td>
-                <td className="border p-2">{r.vesselType}</td>
-                <td className="border p-2">{r.fuelType}</td>
-                <td className="border p-2">{r.year}</td>
-                <td className="border p-2">{r.ghgIntensity}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+          <div className="p-6">
+            <Routes>
+              <Route path="/" element={<Navigate to="/routes" replace />} />
+              <Route path="/routes" element={<RoutesTab />} />
+              <Route path="/compare" element={<CompareTab />} />
+              <Route path="/banking" element={<BankingTab />} />
+              <Route path="/pooling" element={<PoolingTab />} />
+              <Route
+                path="*"
+                element={
+                  <h2 className="text-center text-xl">
+                    Welcome to Fuel-EU Dashboard 🚢
+                  </h2>
+                }
+              />
+            </Routes>
+          </div>
+        </div>
+      </ErrorBoundary>
+    </Router>
   );
 }
 
