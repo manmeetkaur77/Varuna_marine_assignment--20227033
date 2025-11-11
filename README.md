@@ -1,9 +1,9 @@
-# 🚢 FuelEU Maritime Compliance Dashboard
+# FuelEU Maritime Compliance Dashboard
 
-## 🚀 Overview
+## Overview
 This project implements the core mechanisms inspired by **EU Regulation 2023/1805**, focusing on decarbonization of maritime transport. It allows users to manage, visualize, and simulate compliance processes under the **FuelEU Maritime** framework.
 
-### 🌍 Key Features
+### Key Features
 - **Routes Management** – View and analyze GHG intensities of shipping routes.
 - **Baseline Comparison** – Set a baseline route and compare GHG performance.
 - **Article 20 – Banking** – Bank and apply Compliance Balances (CBs).
@@ -13,7 +13,7 @@ Each tab of the dashboard represents one part of the regulation logic.
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 **Frontend:** React + TypeScript + Recharts + TailwindCSS  
 **Backend:** Node.js + Express + Prisma ORM  
@@ -22,7 +22,7 @@ Each tab of the dashboard represents one part of the regulation logic.
 
 ---
 
-## 🧩 Project Structure
+##  Project Structure
 ```
 frontend/
  ├── src/
@@ -51,27 +51,27 @@ backend/
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
-### 1️⃣ Routes Tab
+### 1-Routes Tab
 Displays all available shipping routes with baseline selection.  
 ![Routes Tab](./frontend/public/screenshots/routes-tab.png)
 
-### 2️⃣ Compare Tab
+### 2-Compare Tab
 Shows GHG intensity comparison and compliance chart.  
 ![Compare Tab](./frontend/public/screenshots/compare-tab.png)
 
-### 3️⃣ Banking Tab
+### 3-Banking Tab
 Implements Article 20 – Banking (store and apply compliance balances).  
 ![Banking Tab](./frontend/public/screenshots/banking-dashboard.png)
 
-### 4️⃣ Pooling Tab
+### 4-Pooling Tab
 Implements Article 21 – Pooling (share adjusted compliance balances).  
 ![Pooling Tab](./frontend/public/screenshots/pooling-tab.png)
 
 ---
 
-## 🧪 API Endpoints
+## API Endpoints
 
 ### Routes
 - `GET /api/routes` → Fetch all routes
@@ -89,9 +89,9 @@ Implements Article 21 – Pooling (share adjusted compliance balances).
 
 ---
 
-## 🧠 How to Run Locally
+## How to Run Locally
 
-### 1️⃣ Backend Setup
+### 1-Backend Setup
 ```bash
 cd backend
 npm install
@@ -100,7 +100,7 @@ npx prisma migrate dev
 npm run start
 ```
 
-### 2️⃣ Frontend Setup
+### 2-Frontend Setup
 ```bash
 cd frontend
 npm install
@@ -111,11 +111,11 @@ Then open [http://localhost:5173](http://localhost:5173) 🎨
 
 ---
 
-## 🤝 Contributors
+##  Contributors
 - **Manmeet Kaur** – Developer & Architect
 
 ---
 
-## 📄 License
+## License
 MIT License © 2025 Manmeet Kaur
 
