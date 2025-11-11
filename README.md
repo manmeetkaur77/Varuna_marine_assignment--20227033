@@ -97,7 +97,7 @@ cd backend
 npm install
 npx prisma generate
 npx prisma migrate dev
-npm run dev
+npm run start
 ```
 
 ### 2️⃣ Frontend Setup
