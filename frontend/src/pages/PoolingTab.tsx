@@ -44,7 +44,7 @@ export default function PoolingTab() {
       </ul>
 
       {result && <pre className="mt-3 text-xs bg-slate-50 p-3 rounded">{JSON.stringify(result,null,2)}</pre>}
-      {msg && <div className="mt-2 text-sm">{msg}</div>
+      {msg && <div className="mt-2 text-sm">{msg}</div>}
     </div>
   );
 }
